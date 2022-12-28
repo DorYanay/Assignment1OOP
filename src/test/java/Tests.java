@@ -87,6 +87,7 @@ public class Tests {
         ga.register(m1);
         ga.register(m2);
         ga.register(m3);
+        //checking append.
         ga.append("TRAIN");
         assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
         assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
@@ -95,6 +96,7 @@ public class Tests {
         assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
         assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
         assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
+        //checking empty string.
         ga.append("");
         assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
         assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
@@ -103,14 +105,17 @@ public class Tests {
         assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
         assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
         assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
+        //checking insert with string.
         ga.insert(0, "TRAIN");
         assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
         assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
         assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
+        //checking delete
         ga.delete(0, 4);
         assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
         assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
         assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
+        //Checking Insert and Delete with index out of bounds.
         ga.insert(7, "WORLD");
         assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
         assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
