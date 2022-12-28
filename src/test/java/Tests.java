@@ -4,16 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
 import observer.Member;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-
-import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Tests class
+ *  @author Dor Yanay, Yevgeny Ivanov
+ */
 public class Tests {
     public static final Logger logger = LoggerFactory.getLogger(Tests.class);
 
@@ -92,29 +88,37 @@ public class Tests {
         ga.register(m2);
         ga.register(m3);
         ga.append("TRAIN");
-        assertEquals(m1.getCurrentMember(), ga.getCurrentMember());
-        assertEquals(m2.getCurrentMember(), ga.getCurrentMember());
-        assertEquals(m3.getCurrentMember(), ga.getCurrentMember());
+        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
         ga.undo();
-        assertEquals(m1.getCurrentMember(), ga.getCurrentMember());
-        assertEquals(m2.getCurrentMember(), ga.getCurrentMember());
-        assertEquals(m3.getCurrentMember(), ga.getCurrentMember());
+        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
+        ga.append("");
+        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
+        ga.undo();
+        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
         ga.insert(0, "TRAIN");
-        assertEquals(m1.getCurrentMember(), ga.getCurrentMember());
-        assertEquals(m2.getCurrentMember(), ga.getCurrentMember());
-        assertEquals(m3.getCurrentMember(), ga.getCurrentMember());
+        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
         ga.delete(0, 4);
-        assertEquals(m1.getCurrentMember(), ga.getCurrentMember());
-        assertEquals(m2.getCurrentMember(), ga.getCurrentMember());
-        assertEquals(m3.getCurrentMember(), ga.getCurrentMember());
+        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
         ga.insert(7, "WORLD");
-        assertEquals(m1.getCurrentMember(), ga.getCurrentMember());
-        assertEquals(m2.getCurrentMember(), ga.getCurrentMember());
-        assertEquals(m3.getCurrentMember(), ga.getCurrentMember());
+        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
         ga.delete(5, 7);
-        assertEquals(m1.getCurrentMember(), ga.getCurrentMember());
-        assertEquals(m2.getCurrentMember(), ga.getCurrentMember());
-        assertEquals(m3.getCurrentMember(), ga.getCurrentMember());
+        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
 
     }
 
