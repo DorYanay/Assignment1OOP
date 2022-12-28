@@ -17,6 +17,10 @@ public class GroupAdmin implements Sender {
         members = new HashSet<Member>();
         usb = new UndoableStringBuilder();
     }
+    public GroupAdmin(String str) {
+        members = new HashSet<Member>();
+        usb = new UndoableStringBuilder(str);
+    }
 
     /**
      * Implements the command register from Sender (observer).

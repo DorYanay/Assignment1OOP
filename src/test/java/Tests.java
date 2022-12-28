@@ -37,19 +37,24 @@ public class Tests {
         ConcreteMember m4 = new ConcreteMember();
         ConcreteMember m5 = new ConcreteMember();
         ConcreteMember m6 = new ConcreteMember();
-        GroupAdmin ga = new GroupAdmin();
-        ga.register(m1);
-        ga.register(m2);
-        ga.register(m3);
-        ga.register(m4);
-        ga.register(m5);
-        assertEquals(ga.getSize(), 5);
-        assertTrue(ga.contains(m1));
-        assertTrue(ga.contains(m2));
-        assertTrue(ga.contains(m3));
-        assertTrue(ga.contains(m4));
-        assertTrue(ga.contains(m5));
-        assertFalse(ga.contains(m6));
+        GroupAdmin g = new GroupAdmin();
+        assertEquals(g.getCurrentINFO(),"");
+        GroupAdmin g1 = new GroupAdmin("JAVA");
+        assertEquals(g1.getCurrentINFO(),"JAVA");
+        GroupAdmin g2 = new GroupAdmin(null);
+        assertEquals(g2.getCurrentINFO(),"");
+        g.register(m1);
+        g.register(m2);
+        g.register(m3);
+        g.register(m4);
+        g.register(m5);
+        assertEquals(g.getSize(), 5);
+        assertTrue(g.contains(m1));
+        assertTrue(g.contains(m2));
+        assertTrue(g.contains(m3));
+        assertTrue(g.contains(m4));
+        assertTrue(g.contains(m5));
+        assertFalse(g.contains(m6));
     }
 
     @Test
@@ -59,23 +64,23 @@ public class Tests {
         ConcreteMember m3 = new ConcreteMember();
         ConcreteMember m4 = new ConcreteMember();
         ConcreteMember m5 = new ConcreteMember();
-        GroupAdmin ga = new GroupAdmin();
-        ga.register(m1);
-        ga.register(m2);
-        ga.register(m3);
-        ga.register(m4);
-        ga.register(m5);
-        ga.unregister(m1);
-        ga.unregister(m2);
-        ga.unregister(m3);
-        ga.unregister(m4);
-        ga.unregister(m5);
-        assertEquals(ga.getSize(), 0);
-        assertFalse(ga.contains(m1));
-        assertFalse(ga.contains(m2));
-        assertFalse(ga.contains(m3));
-        assertFalse(ga.contains(m4));
-        assertFalse(ga.contains(m5));
+        GroupAdmin g = new GroupAdmin();
+        g.register(m1);
+        g.register(m2);
+        g.register(m3);
+        g.register(m4);
+        g.register(m5);
+        g.unregister(m1);
+        g.unregister(m2);
+        g.unregister(m3);
+        g.unregister(m4);
+        g.unregister(m5);
+        assertEquals(g.getSize(), 0);
+        assertFalse(g.contains(m1));
+        assertFalse(g.contains(m2));
+        assertFalse(g.contains(m3));
+        assertFalse(g.contains(m4));
+        assertFalse(g.contains(m5));
     }
 
     @Test
@@ -83,47 +88,47 @@ public class Tests {
         ConcreteMember m1 = new ConcreteMember();
         ConcreteMember m2 = new ConcreteMember();
         ConcreteMember m3 = new ConcreteMember();
-        GroupAdmin ga = new GroupAdmin();
-        ga.register(m1);
-        ga.register(m2);
-        ga.register(m3);
+        GroupAdmin g = new GroupAdmin();
+        g.register(m1);
+        g.register(m2);
+        g.register(m3);
         //checking append.
-        ga.append("TRAIN");
-        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
-        ga.undo();
-        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
+        g.append("TRAIN");
+        assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
+        g.undo();
+        assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
         //checking empty string.
-        ga.append("");
-        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
-        ga.undo();
-        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
+        g.append("");
+        assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
+        g.undo();
+        assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
         //checking insert with string.
-        ga.insert(0, "TRAIN");
-        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
+        g.insert(0, "TRAIN");
+        assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
         //checking delete
-        ga.delete(0, 4);
-        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
+        g.delete(0, 4);
+        assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
         //Checking Insert and Delete with index out of bounds.
-        ga.insert(7, "WORLD");
-        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
-        ga.delete(5, 7);
-        assertEquals(m1.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m2.getCurrentINFO(), ga.getCurrentINFO());
-        assertEquals(m3.getCurrentINFO(), ga.getCurrentINFO());
+        g.insert(7, "WORLD");
+        assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
+        g.delete(5, 7);
+        assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
+        assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
 
     }
 

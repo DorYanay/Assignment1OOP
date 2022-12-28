@@ -25,6 +25,14 @@ class UndoableStringBuilder {
     public UndoableStringBuilder() {
         stringBuilder = new StringBuilder();
     }
+    public UndoableStringBuilder(String str) {
+        if(str == null) {
+            stringBuilder = new StringBuilder();
+        }
+        else {
+            stringBuilder = new StringBuilder(str);
+        }
+    }
 
     public UndoableStringBuilder reverse() {
         stringBuilder.reverse();
