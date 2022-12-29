@@ -38,16 +38,21 @@ public class Tests {
         ConcreteMember m5 = new ConcreteMember();
         ConcreteMember m6 = new ConcreteMember();
         GroupAdmin g = new GroupAdmin();
-        logger.info(() -> JvmUtilities.objectFootprint(m1));
-        logger.info(() -> JvmUtilities.objectFootprint(g, m2));
-        logger.info(() -> JvmUtilities.objectFootprint(m1, m2));
+        System.out.println("logger GroupAdmin memoryStats before registering members");
+        logger.info(() -> JvmUtilities.memoryStats(g));
+        System.out.println("logger GroupAdmin objectTotalSize after registering members");
         logger.info(() -> JvmUtilities.objectTotalSize(g));
         g.register(m1);
         g.register(m2);
         g.register(m3);
         g.register(m4);
         g.register(m5);
+        System.out.println("logger GroupAdmin memoryStats after registering members");
+        logger.info(() -> JvmUtilities.memoryStats(g));
+        System.out.println("logger GroupAdmin objectTotalSize after registering members");
         logger.info(() -> JvmUtilities.objectTotalSize(g));
+        //Registering twice the same member.
+        g.register(m1);
         assertEquals(g.getSize(), 5);
         assertTrue(g.contains(m1));
         assertTrue(g.contains(m2));
@@ -70,12 +75,18 @@ public class Tests {
         g.register(m3);
         g.register(m4);
         g.register(m5);
+        System.out.println("logger GroupAdmin memoryStats after registering members");
+        logger.info(() -> JvmUtilities.memoryStats(g));
+        System.out.println("logger GroupAdmin objectTotalSize after registering members");
         logger.info(() -> JvmUtilities.objectTotalSize(g));
         g.unregister(m1);
         g.unregister(m2);
         g.unregister(m3);
         g.unregister(m4);
         g.unregister(m5);
+        System.out.println("logger GroupAdmin memoryStats after unregistering members");
+        logger.info(() -> JvmUtilities.memoryStats(g));
+        System.out.println("logger GroupAdmin objectTotalSize after unregistering members");
         logger.info(() -> JvmUtilities.objectTotalSize(g));
         assertEquals(g.getSize(), 0);
         assertFalse(g.contains(m1));
@@ -92,10 +103,10 @@ public class Tests {
         assertEquals(g.getCurrentINFO(),"");
         GroupAdmin g1 = new GroupAdmin("JAVA");
         assertEquals(g1.getCurrentINFO(),"JAVA");
+        g1.undo();
+        assertEquals(g1.getCurrentINFO(),"");
         GroupAdmin g2 = new GroupAdmin(null);
         assertEquals(g2.getCurrentINFO(),"");
-        logger.info(() -> JvmUtilities.objectFootprint(g1));
-        logger.info(() -> JvmUtilities.objectFootprint(g, g1));
     }
     @Test
     void notifyMembers() {
@@ -111,10 +122,14 @@ public class Tests {
         assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
         assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
         assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
+        System.out.println("logger GroupAdmin memoryStats after appending String");
+        logger.info(() -> JvmUtilities.memoryStats(g));
         g.undo();
         assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
         assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
         assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
+        System.out.println("logger GroupAdmin memoryStats after undo");
+        logger.info(() -> JvmUtilities.memoryStats(g));
         //checking empty string.
         g.append("");
         assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
@@ -129,11 +144,15 @@ public class Tests {
         assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
         assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
         assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
+        System.out.println("logger GroupAdmin memoryStats after inserting string");
+        logger.info(() -> JvmUtilities.memoryStats(g));
         //checking delete
         g.delete(0, 4);
         assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
         assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
         assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
+        System.out.println("logger GroupAdmin memoryStats after deleting string");
+        logger.info(() -> JvmUtilities.memoryStats(g));
         //Checking Insert and Delete with index out of bounds.
         g.insert(7, "WORLD");
         assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
@@ -143,7 +162,6 @@ public class Tests {
         assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
         assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
         assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
-        logger.info(() -> JvmUtilities.jvmInfo());
 
     }
 

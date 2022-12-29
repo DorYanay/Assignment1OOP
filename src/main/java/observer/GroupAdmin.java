@@ -28,15 +28,7 @@ public class GroupAdmin implements Sender {
      */
     @Override
     public void register(Member obj) {
-        if(!members.isEmpty()) {
-            if (!members.contains(obj)) {
-                members.add(obj);
-            }
-        }
-        else {
-            members.add(obj);
-        }
-
+        members.add(obj);
     }
     /**
      * Implements the command unregister from Sender (observer).

@@ -25,6 +25,7 @@ class UndoableStringBuilder {
     public UndoableStringBuilder() {
         stringBuilder = new StringBuilder();
     }
+    //Add another constructor so we could use string in the start without using append or insert.
     public UndoableStringBuilder(String str) {
         if(str == null) {
             stringBuilder = new StringBuilder();
@@ -32,6 +33,12 @@ class UndoableStringBuilder {
         else {
             stringBuilder = new StringBuilder(str);
         }
+        Action action = new Action(){
+            public void undo() {
+                stringBuilder = new StringBuilder();
+            }
+        };
+        actions.add(action);
     }
 
     public UndoableStringBuilder reverse() {
