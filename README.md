@@ -28,7 +28,7 @@ the folder "test" contains the tests for the .java files
 #### Interfaces
 Member.java Sender.java
 
-## Project Interface
-Any Java IDE
+## How to run the Project
+We used Intellij 2202.3 , run the pom.xml as a project.
 
 
