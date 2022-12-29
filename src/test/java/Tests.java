@@ -38,16 +38,16 @@ public class Tests {
         ConcreteMember m5 = new ConcreteMember();
         ConcreteMember m6 = new ConcreteMember();
         GroupAdmin g = new GroupAdmin();
-        assertEquals(g.getCurrentINFO(),"");
-        GroupAdmin g1 = new GroupAdmin("JAVA");
-        assertEquals(g1.getCurrentINFO(),"JAVA");
-        GroupAdmin g2 = new GroupAdmin(null);
-        assertEquals(g2.getCurrentINFO(),"");
+        logger.info(() -> JvmUtilities.objectFootprint(m1));
+        logger.info(() -> JvmUtilities.objectFootprint(g, m2));
+        logger.info(() -> JvmUtilities.objectFootprint(m1, m2));
+        logger.info(() -> JvmUtilities.objectTotalSize(g));
         g.register(m1);
         g.register(m2);
         g.register(m3);
         g.register(m4);
         g.register(m5);
+        logger.info(() -> JvmUtilities.objectTotalSize(g));
         assertEquals(g.getSize(), 5);
         assertTrue(g.contains(m1));
         assertTrue(g.contains(m2));
@@ -70,11 +70,13 @@ public class Tests {
         g.register(m3);
         g.register(m4);
         g.register(m5);
+        logger.info(() -> JvmUtilities.objectTotalSize(g));
         g.unregister(m1);
         g.unregister(m2);
         g.unregister(m3);
         g.unregister(m4);
         g.unregister(m5);
+        logger.info(() -> JvmUtilities.objectTotalSize(g));
         assertEquals(g.getSize(), 0);
         assertFalse(g.contains(m1));
         assertFalse(g.contains(m2));
@@ -83,6 +85,18 @@ public class Tests {
         assertFalse(g.contains(m5));
     }
 
+    @Test
+
+    void GroupATest() {
+        GroupAdmin g = new GroupAdmin();
+        assertEquals(g.getCurrentINFO(),"");
+        GroupAdmin g1 = new GroupAdmin("JAVA");
+        assertEquals(g1.getCurrentINFO(),"JAVA");
+        GroupAdmin g2 = new GroupAdmin(null);
+        assertEquals(g2.getCurrentINFO(),"");
+        logger.info(() -> JvmUtilities.objectFootprint(g1));
+        logger.info(() -> JvmUtilities.objectFootprint(g, g1));
+    }
     @Test
     void notifyMembers() {
         ConcreteMember m1 = new ConcreteMember();
@@ -129,6 +143,7 @@ public class Tests {
         assertEquals(m1.getCurrentINFO(), g.getCurrentINFO());
         assertEquals(m2.getCurrentINFO(), g.getCurrentINFO());
         assertEquals(m3.getCurrentINFO(), g.getCurrentINFO());
+        logger.info(() -> JvmUtilities.jvmInfo());
 
     }
 
